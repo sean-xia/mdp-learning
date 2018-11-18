@@ -1,4 +1,9 @@
+
+
 # 马尔科夫链
+
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=default"></script>
+
 
 本节介绍马氏链（MC）的概念和性质。本文仅考虑有限离散时间过程。
 
@@ -9,3 +14,4 @@
 ```math
 X_t\in S
 ```
+
