@@ -4,13 +4,13 @@
 
 本节介绍马氏链（MC）的概念和性质。本文仅考虑有限离散时间过程。
 
-## MC基础
+## 1. MC基础
 
 定义一个随时间变化的**过程**， 令$X_t$ 表示一个随机变量，$t$为正整数。将该过程限定在某系统内部，系统包含不同的**状态** $\mathcal{S}$, 也即是
 
 $$X_t\in \mathcal{S}$$ 
 
-假设各状态之间的切换时随机的，就得到一个随机过程。如果某时刻$t$的状态为$i$，则记为$X_t=i$. 从状态$i$到状态$j$的一步**转移概率**记为$p_{ij}​$ . 这个概率是不随时间而变化的。
+假设各状态之间的切换时随机的，就得到一个随机过程。如果某时刻$t$的状态为$i$，则记为$X_t=i$. 从状态$i$到状态$j$的一步**转移概率**记为$p_{ij}$ . 这个概率是不随时间而变化的。
 
 **马尔科夫过程**：从状态$i$转换到状态$j$ 的概率和状态$i$之前的状态无关，即：
 $$
@@ -43,7 +43,7 @@ P=\left(
 $$
 不难发现该MC是遍历和不可约的。
 
-## Chapman-Kolmogorov方程
+## 2. Chapman-Kolmogorov方程
 
 从上节知道，我们定义$p_{ij}^n$为在$n$步内从状态$i$转移到状态$j$的概率。即
 $$
@@ -81,5 +81,31 @@ P^2=\left(
 $$
 这个结论可以用逐步计算来 验证：从A到C有两种途径，$\{A\to B\to C, A\to C\to C\}$,概率可以计算为：$\frac{1}{3}\frac{1}{2}+\frac{2}{3}\frac{1}{2}=\frac{1}{2}$.
 
+## 3. 击中时
 
 
+
+将**击中时**定义为随机过程进入某个非空的状态集合${C}\subset\mathcal{S}$ 的首次时间，假设${C}$是一个闭合互通类。现在，假设我们有一个状态集合$\mathcal{S}$上的时间离散马氏链$X$，令${C}\subset \mathcal{S}$是用于$X$ 的闭合互通类。定义集合$C$上的**吸收时间 **$\tau^C\in \mathbb{N}$为：
+$$
+\tau^C=
+\begin{cases}
+\min \{t\ge0:X_t\in C \}   &\text{if $X_t\in C$ for some $t\ge0$}\\
+\infty& \text{otherwise}
+\end{cases}
+\tag{6}
+$$
+从状态$i$开始进入状态集合$C$的吸收概率定义为：
+$$
+\begin{split}
+h_i^C=&P(\tau^C<\infty|X_0=i)\\
+=&P(\exist t<\infty:X_t\in C|X_0=i)\\
+:=&P(X_t\in C|X_0=i).
+\end{split}
+$$
+下面，为了求解一个概率向量$h^C=(h_i^c, h_2^C,...)$，我们建立如下的线性方程组：
+$$
+\begin{cases}
+h_i^C=1&\text{if $i\in C$}\\
+h_i^C=\sum_{j\in \mathcal{S}}p_{ij}h_j^{C}&\text{if $i\notin C$.}
+\end{cases}
+$$
